@@ -4,7 +4,7 @@ const hbs = require("express-handlebars");
 const session = require("express-session");
 const FileStore = require("session-file-store")(session);
 const flash = require("express-flash");
-const PORT = process.env.PORT ;
+const PORT = process.env.PORT;
 
 const app = express();
 
@@ -15,6 +15,7 @@ const Tought = require("./models/Tought");
 
 // routes
 const toughtsRoutes = require("./routes/ToughtRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 const ToughController = require("./controllers/ToughtController");
 
@@ -62,6 +63,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/toughts", toughtsRoutes);
+app.use("/", authRoutes);
 
 
 app.get("/", ToughController.showToughts);
