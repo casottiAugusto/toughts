@@ -78,8 +78,8 @@ module.exports = class UserController {
         // initialize session
         req.session.userid = createdUser.id
 
-        // console.log('salvou dado')
-        // console.log(req.session.userid)
+        console.log('salvou dado')
+        console.log(req.session.userid)
 
         req.session.userid = createdUser.id
 
