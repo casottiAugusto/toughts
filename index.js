@@ -73,8 +73,8 @@ app.use("/", authRoutes);
 app.get("/", ToughController.showToughts);
 
 conn
-// .sync()
- .sync({force: true})
+.sync()
+// .sync({force: true})
   .then(() => {
     app.listen(PORT, () => {
         console.log(`Server running on http://localhost:${PORT}`);
