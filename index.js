@@ -45,7 +45,7 @@ app.use(
     cookie: {
       secure: false,
       maxAge: 3600000,
-      expires: new Date(Date.now() + 3600000),
+     
       httpOnly: true,
     },
   }),
@@ -58,7 +58,10 @@ app.use(express.static("public"));
 
 // set session to res
 app.use((req, res, next) => {
-
+// Check if session exists  
+if (req.session.userid) {
+  res.locals.userId = req.session.userid;
+}
   next();
 });
 
@@ -69,7 +72,8 @@ app.use("/", authRoutes);
 app.get("/", ToughController.showToughts);
 
 conn
-  .sync()
+ .sync()
+//  .sync({force: true})
   .then(() => {
     app.listen(PORT, () => {
         console.log(`Server running on http://localhost:${PORT}`);
