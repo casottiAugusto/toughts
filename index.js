@@ -15,7 +15,7 @@ const Tought = require("./models/Tought");
 
 // routes
 const toughtsRoutes = require("./routes/ToughtRoutes");
-const authRoutes = require("./routes/authRoutes");
+const authRoutes = require("./routes/AuthRoutes");
 
 const ToughController = require("./controllers/ToughtController");
 
@@ -59,9 +59,10 @@ app.use(express.static("public"));
 // set session to res
 app.use((req, res, next) => {
 // Check if session exists  
-if (req.session.userid) {
-  res.locals.userId = req.session.userid;
-}
+if (req.session) {
+    res.locals.session = req.session;
+  }
+
   next();
 });
 
@@ -72,8 +73,8 @@ app.use("/", authRoutes);
 app.get("/", ToughController.showToughts);
 
 conn
- .sync()
-//  .sync({force: true})
+// .sync()
+ .sync({force: true})
   .then(() => {
     app.listen(PORT, () => {
         console.log(`Server running on http://localhost:${PORT}`);
