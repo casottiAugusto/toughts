@@ -1,3 +1,4 @@
+const { use } = require('react')
 const User = require('../models/User')
 
 const bcrypt = require('bcryptjs')
@@ -44,6 +45,7 @@ module.exports = class UserController {
     }
 
     const createdUser = await User.create(user)
+
       
         // initialize session
         req.session.userid = user.id
