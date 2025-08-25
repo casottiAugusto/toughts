@@ -1,6 +1,14 @@
 <div class="dashboard">
-    <div class="title-container">
-        <h2>Dashboard</h2>
-        <a href="/toughts/add" class="btn">Criar Pensamento</a>
-    </div>
+  <div class="title-container">
+    <h2>Dashboard</h2>
+    <a href="/toughts/add" class="btn">Criar Pensamento</a>
+  </div>
+  <h3>Seus Pensamentos</h3>
+  <div class="toughts-container">
+    {{#each toughts}}
+      <div class="tought">
+        <h4>{{this.title}}</h4>
+      </div>
+    {{/each}}
+  </div>
 </div>
