@@ -3,7 +3,11 @@ const User = require("../models/User");
 
 module.exports = class ToughtController {
   static async showToughts(req, res) {
-    res.render("toughts/home");
+    const toughts = await Tought.findAll({
+      include: User,
+    });
+    const tought = toughts.map((result) => result.get({ plain: true }));
+    res.render("toughts/home", { tought });
   }
   static async dashboard(req, res) {
     const userId = req.session.userid;
