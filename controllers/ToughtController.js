@@ -19,7 +19,7 @@ module.exports = class ToughtController {
     }
 
     const toughts = user.Toughts.map((tought) => tought.dataValues);
-    console.log(toughts);
+
     res.render("toughts/dashboard", { toughts });
   }
   static createTought(req, res) {

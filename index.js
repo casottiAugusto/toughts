@@ -21,7 +21,7 @@ const ToughController = require("./controllers/ToughtController");
 
 app.engine("handlebars", hbs.engine());
 app.set("view engine", "handlebars");
-app.set('views', './views');
+app.set("views", "./views");
 
 app.use(
   express.urlencoded({
@@ -34,13 +34,13 @@ app.use(express.json());
 //session middleware
 app.use(
   session({
-    name: 'session',
-    secret: 'nosso_secret',
+    name: "session",
+    secret: "nosso_secret",
     resave: false,
     saveUninitialized: false,
     store: new FileStore({
       logFn: function () {},
-      path: require('path').join(require('os').tmpdir(), 'sessions'),
+      path: require("path").join(require("os").tmpdir(), "sessions"),
     }),
     cookie: {
       secure: false,
@@ -48,8 +48,8 @@ app.use(
       expires: new Date(Date.now() + 3600000),
       httpOnly: true,
     },
-  }),
-)
+  })
+);
 
 // flash messages
 app.use(flash());
@@ -58,8 +58,8 @@ app.use(express.static("public"));
 
 // set session to res
 app.use((req, res, next) => {
-// Check if session exists  
-if (req.session) {
+  // Check if session exists
+  if (req.session) {
     res.locals.session = req.session;
   }
 
@@ -69,15 +69,14 @@ if (req.session) {
 app.use("/toughts", toughtsRoutes);
 app.use("/", authRoutes);
 
-
 app.get("/", ToughController.showToughts);
 
 conn
-.sync()
-// .sync({force: true})
+  .sync()
+  // .sync({force: true})
   .then(() => {
     app.listen(PORT, () => {
-        console.log(`Server running on http://localhost:${PORT}`);
+      console.log(`Server running on http://localhost:${PORT}`);
     });
   })
   .catch((err) => console.log(`Error: ${err}`));
