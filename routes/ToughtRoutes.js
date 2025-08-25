@@ -9,6 +9,7 @@ router.get("/add", checkAuth, ToughtController.createTought);
 router.post("/add", checkAuth, ToughtController.createToughtSave);
 router.post("/remove", checkAuth, ToughtController.removeTought);
 router.get("/edit/:id", checkAuth, ToughtController.editTought);
+router.post("/edit", checkAuth, ToughtController.editToughtSave);
 
 router.get("/dashboard", checkAuth, ToughtController.dashboard);
 module.exports = router;
