@@ -8,6 +8,13 @@ module.exports = class ToughtController {
     if (req.query.search) {
       search = req.query.search;
     }
+
+    let order = "DESC";
+    if (req.query.order === "old") {
+      order = "ASC";
+    } else {
+      order = "DESC";
+    }
     const toughts = await Tought.findAll({
       include: User,
       where: {
@@ -15,6 +22,7 @@ module.exports = class ToughtController {
           [Op.like]: `%${search}%`,
         },
       },
+      order: [["createdAt", order]],
     });
     let toughtsQty = toughts.length;
     if (toughtsQty === 0) {
